@@ -23,6 +23,16 @@ class _App extends Component{
       console.log(ex);
     }
   }
+  
+  // I added this
+  async componentDidMount(){
+    const response = await axios.get('/api/users');
+    const users = response.data;
+    this.setState({ users });
+
+  }
+  
+  
   render(){
     const { view } = this.props;
     return (
