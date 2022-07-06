@@ -142,8 +142,8 @@ const init = async()=> {
     );
     
     // thing needs a userId
-    const owner = await User.create('Melanie');
-    await Thing.create({name: 'chair', userId: owner.id})
+    const owner = await User.create({name: 'Melanie'});
+    await Thing.create({name: 'chair', userId: owner.id, ranking: 9})
     
   }
   catch(ex){

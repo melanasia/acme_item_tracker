@@ -23,17 +23,11 @@ class _App extends Component{
       console.log(ex);
     }
   }
-  
-  // I added this
-  async componentDidMount(){
-    const response = await axios.get('/api/users');
-    const users = response.data;
-    this.setState({ users });
 
-  }
   
   
   render(){
+    console.log(this.props)
     const { view } = this.props;
     return (
       <div>
@@ -79,12 +73,11 @@ const mapDispatch = (dispatch)=> {
 };
 const mapStateToProps = state => {
   return {
-    view: state.view
+    view: state.view,
   };
 };
 
 const App = connect(mapStateToProps, mapDispatch)(_App);
-
 
 root.render(<Provider store={ store }><App /></Provider>);
 /*

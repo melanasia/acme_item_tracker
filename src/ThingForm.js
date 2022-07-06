@@ -5,7 +5,7 @@ import axios from 'axios';
 const ThingForm = ({ createThing })=> {
   return (
     <div>
-      <button onClick={ createThing }>+</button>
+      <button onClick={ createThing }>Create</button>
     </div>
   );
 };
@@ -21,3 +21,7 @@ const mapDispatchToProps = (dispatch)=> {
 }
 
 export default connect(null, mapDispatchToProps)(ThingForm);
+
+
+// const func = connect(null, mapDispatchToProps)
+// func(ThingForm);

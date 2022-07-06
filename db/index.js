@@ -3,14 +3,6 @@ const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/the
 
 const { STRING, INTEGER } = Sequelize;
 
-import axios from 'axios';
-axios.defaults.timeout = 2000;
-
-const data = {
-  things: [],
-  users: [],
-};
-
 const User = conn.define('user', {
   name: {
     type: STRING,
@@ -34,13 +26,13 @@ const Thing = conn.define('thing', {
 Thing.belongsTo(User, {as: 'owner', foreignKey: 'userId'});
 User.hasMany(Thing, {as: 'thing'});
 
-User.addHook('afterDestroy', (user)=> {
-  return User.findAll({
-    where: {
-    userId: { [Sequelize.Op.is]: user.id } 
-    },
-  })
-})
+// User.addHook('beforeDestroy', (user)=> {
+//   return Thing.findAll({
+//     where: {
+//     userId: { [Sequelize.Op.is]: user.id } 
+//     },
+//   })
+// })
 
 
 

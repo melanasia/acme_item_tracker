@@ -14,10 +14,17 @@ const store = createStore((state = initialState, action)=> {
     return {...state, users: action.users }; 
   }
   if(action.type === 'SET_VIEW'){
+    console.log(action.view)
     return {...state, view: action.view }; 
   }
   if(action.type === 'CREATE_THING'){
     return {...state, things: [...state.things, action.thing ]}; 
+  }
+  if (action.type === 'DELETE_THING') {
+    return {...state, things: state.things.filter(t => t.id !== action.id)};
+  }
+  if (action.type === 'DELETE_USER') {
+    return {...state, users: state.users.filter(u => u.id !== action.id)};
   }
   return state;
 });
