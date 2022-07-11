@@ -11,7 +11,7 @@ const Users = ({ users, deleteUser })=> {
           users.map( user => {
             return (
               <li key={ user.id }>
-                { user.name }
+                {user.name} {user.ranking}
                 <button onClick={() => deleteUser(user.id)}>Delete</button>
               </li>
             );

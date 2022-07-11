@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch)=> {
     createThing: async()=> {
       const response = await axios.post('/api/things', { name: Math.random()});
       const thing = response.data;
+      // whatever is passed into dispatch is your ACTION aka PAYLOAD
       dispatch({ type: 'CREATE_THING', thing });
     }
   };

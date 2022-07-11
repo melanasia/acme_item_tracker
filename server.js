@@ -42,6 +42,21 @@ app.get('/api/things', async(req, res, next)=> {
   }
 });
 
+// get route to show the users(s) with highest ranking
+
+app.get('/api/users', async(req, res, next)=> {
+  try {
+    res.send(await User.findAll({
+      order: [
+        ['ranking', 'DESC'],
+      ]
+    }));
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
 app.get('/api/users', async(req, res, next)=> {
   try {
     res.send(await User.findAll());
@@ -79,6 +94,26 @@ app.post('/api/things/vote', async(req, res, next)=> {
     thing.ranking = isUpvote ? thing.ranking + 1 : thing.ranking - 1;
     await thing.save();
     res.status(201).send(thing);
+  }
+  catch(ex){
+    next(ex);
+  }
+});
+
+// create a user on the server that accepts and id and a vote
+
+app.post('/api/users/vote', async(req, res, next)=> {
+  try {
+    const id = req.body.id;
+    const isUpvote = req.body.increase_rank === true;
+    if (isNaN(id)) {
+        res.sendStatus(400)
+        return;
+    }
+    const user = await User.findByPk(id);
+    user.ranking = isUpvote ? user.ranking + 1 : user.ranking - 1;
+    await user.save();
+    res.status(201).send(user);
   }
   catch(ex){
     next(ex);

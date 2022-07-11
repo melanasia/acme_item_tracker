@@ -7,13 +7,16 @@ const User = conn.define('user', {
   name: {
     type: STRING,
     allowNull: false,
+  },
+  ranking: {
+    type: INTEGER,
+    defaultValue: 5,
   }
 });
 
 const Thing = conn.define('thing', {
   name: {
     type: STRING, 
-    // we can allow null here? a user can have no things?
   },
   ranking: {
     type: INTEGER,
@@ -25,16 +28,6 @@ const Thing = conn.define('thing', {
 
 Thing.belongsTo(User, {as: 'owner', foreignKey: 'userId'});
 User.hasMany(Thing, {as: 'thing'});
-
-// User.addHook('beforeDestroy', (user)=> {
-//   return Thing.findAll({
-//     where: {
-//     userId: { [Sequelize.Op.is]: user.id } 
-//     },
-//   })
-// })
-
-
 
 module.exports = {
   conn,
